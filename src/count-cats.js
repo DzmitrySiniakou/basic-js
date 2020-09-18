@@ -6,5 +6,4 @@ module.exports = function countCats(matrix) {
     })
   }
   return number;
-  console.log(number);
 };
