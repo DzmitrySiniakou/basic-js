@@ -8,7 +8,7 @@ module.exports = class DepthCalculator {
 
     function recursive(array) { 
       array.forEach(element => {
-        if (typeof element === 'object') {
+        if (Array.isArray(element)) {
           depth = depth + 1;
           return recursive(element);
         } else {
