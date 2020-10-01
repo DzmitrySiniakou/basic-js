@@ -1,18 +1,28 @@
+const CustomError = require("../extensions/custom-error");
+
 module.exports = function repeater(str, options) {
-    // throw 'Not implemented';
-    // remove line with error and write your code here
-    let repStr = str;
-    let outputString = '';
+  const {
+    repeatTimes=1, 
+    separator = '+', 
+    addition, 
+    additionRepeatTimes=1, 
+    additionSeparator = '|'
+  } = options;
 
-    for (let i = 0; i < options.additionRepeatTimes; i++){
-        repStr = repStr + options.addition + ' ';
-    }
+  const createString = ({string, repeatTimes, separator}) => {
+    return Array(repeatTimes || 1).fill(string).join(separator || '')
+  }
 
-    repStr = repStr.trim().split(' ').join(options.additionSeparator);
+  const additionPart = addition !== undefined ? createString({
+    string: `${addition}`,
+    repeatTimes: additionRepeatTimes,
+    separator: additionSeparator
+  }) : ''
 
-    for (let i = 0; i < options.repeatTimes; i++){
-        outputString = outputString + repStr + ' ';
-    }
-
-    return outputString.trim().split(' ').join(options.separator);
+  return createString({
+    string: `${str}` + additionPart,
+    repeatTimes: repeatTimes,
+    separator: separator
+  })
+ 
 };
